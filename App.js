@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import firebase from 'firebase';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
 import { Header } from './src/components/common';
 import LoginFrom from './src/components/LoginFrom';
 import Logout from './src/components/Logout';
+import ProductList from './src/components/ProductList'
 
 import config from './src/config';
+
+const Drawer = createDrawerNavigator()
 
 class App extends Component {
   state = {
@@ -17,16 +23,27 @@ class App extends Component {
       firebase.initializeApp(config.firebaseConfig)
     }
 
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({loggedIn: !! user})
+    firebase.auth().onAuthStateChanged(user => 
+      { this.setState({loggedIn: !! user})
     })
   }
   render() { 
     return ( 
-      <View>
+      <NavigationContainer>
         <Header title="Product management" />
-        { this.state.loggedIn ? <Logout/> : <LoginFrom /> }
-      </View>
+        <Drawer.Navigator>
+        { this.state.loggedIn ? 
+          <>
+          <Drawer.Screen name="Product List" component={ ProductList } />
+          <Drawer.Screen name="Logout" component={ Logout } />
+          </>
+        : 
+          <>
+          <Drawer.Screen name="Login" component={ LoginFrom } />
+          </>
+        }      
+        </Drawer.Navigator>
+      </NavigationContainer>
      );
   }
 }
