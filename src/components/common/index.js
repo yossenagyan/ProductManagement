@@ -4,6 +4,7 @@ import CardSection from './CardSection'
 import Header from './Header'
 import Input from './Input'
 import Spinner from './Spinner'
+import InputPicker from './InputPicker'
 
 export  {
     Button,
@@ -11,5 +12,6 @@ export  {
     CardSection,
     Header,
     Input,
-    Spinner
+    Spinner,
+    InputPicker,
 }

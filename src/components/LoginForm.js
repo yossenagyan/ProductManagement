@@ -5,7 +5,7 @@ import {Text} from 'react-native';
 import {Card, CardSection, Button, Spinner, Input} from './common';
 
 
-class LoginFrom extends Component {
+class LoginForm extends Component {
     state = {
         email:'',
         password: '',
@@ -87,4 +87,4 @@ class LoginFrom extends Component {
     }
 }
  
-export default LoginFrom;
+export default LoginForm;
