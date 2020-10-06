@@ -15,9 +15,9 @@ class ProductForm extends Component {
         } else {
             axios.get('https://simple-ecommerce-9999.herokuapp.com/api/v1/category')
             .then(({data}) => {
-                this.setState({ categoryList: data.data })
-                this.props.dispatch({ type: 'SET_CATEGORY_LIST', payload: data.data })
                 console.log(data.data);
+                this.setState({ categoryList: data.data })
+                this.props.setCategory(data.data)
             })
         }      
     }   
@@ -31,19 +31,39 @@ class ProductForm extends Component {
         return ( 
           <>
             <CardSection>
-                <Input label="Name" placeholder="Product Name" />
+                <Input 
+                value = { this.props.form.name }
+                onChangeText = { (val) => this.props.setForm('name', val) }
+                label="Name" 
+                placeholder="Product Name" />
             </CardSection>
             <CardSection>
-                <Input label="Price" placeholder="Product Price" />
+                <Input
+                value = { this.props.form.price }
+                onChangeText = { (val) => this.props.setForm('price', val) } 
+                label="Price" 
+                placeholder="Product Price" />
             </CardSection>
             <CardSection>
-                <Input label="Image" placeholder="https://..." />
+                <Input
+                value = { this.props.form.image }
+                onChangeText = { (val) => this.props.setForm('image', val) } 
+                label="Image" 
+                placeholder="https://..." />
             </CardSection>
             <CardSection>
-                <Input label="Action Link" placeholder="https://..." />
+                <Input
+                value = { this.props.form.actionLink }
+                onChangeText = { (val) => this.props.setForm('actionLink', val) } 
+                label="Action Link" 
+                placeholder="https://..." />
             </CardSection>
             <CardSection>
-                <InputPicker label= "Category" data= {pickerData} />
+                <InputPicker
+                selectedValue = { this.props.form.id_category }
+                onValueChange = { (val) => this.props.setForm('id_category', val) } 
+                label= "Category" 
+                data= {pickerData} />
             </CardSection>
 
           </>  
@@ -55,7 +75,15 @@ const mstp = (state) => {
     return {
         hasCategory: state.categoryList.hasCategory,
         categoryList: state.categoryList.categoryList,
+        form: state.productForm
+    }
+}
+
+const mdtp = (dispatch) => {
+    return {
+        setCategory: (category) => dispatch({ type: 'SET_CATEGORY_LIST', payload: category}),
+        setForm: (key, value) => dispatch({ type: 'SET_PRODUCT_FIELD', payload: [key, value] })
     }
 }
  
-export default connect(mstp)(ProductForm);
+export default connect(mstp, mdtp)(ProductForm);
