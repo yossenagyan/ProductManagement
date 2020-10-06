@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import firebase from 'firebase';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Provider } from 'react-redux';

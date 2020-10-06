@@ -4,13 +4,13 @@ import { Card } from './common';
 
 import ProductForm from './ProductForm';
 
-class ProductCreate extends Component {
+class ProductCreate  extends Component {
     render() { 
-        return ( 
+        return (
             <Card>
-                <ProductForm />
+                <ProductForm/>
             </Card>
-         );
+          );
     }
 }
  

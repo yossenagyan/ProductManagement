@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import { Picker } from '@react-native-community/picker';
+import {Picker} from '@react-native-community/picker';
 
 const style = StyleSheet.create({
     containter: {
@@ -20,7 +20,7 @@ const style = StyleSheet.create({
     },
     input: {
         flex: 2,
-        fontSize: 16,
+        fontSize: 18,
         height: 50,
         color: 'black'
     }
@@ -29,24 +29,22 @@ const style = StyleSheet.create({
 class InputPicker extends Component {
 
     render() { 
-        const { label, data, selectedValue, onValueChange } = this.props
-
+        const { label, data, seletedValue, onValueChange } = this.props
+        
         const renderPickerItem = data.map((item, i) =>
-            <Picker.item label= { item.label } value= { item.value } key= { i} /> 
+            <Picker.Item label= { item.label } value= { item.value } key= { i } />
         )
         
-            return ( 
+        return ( 
             <View style= {style.containter}>
                 <Text style= {style.label}>{label}</Text>
-                <Picker
-                selectedValue= {selectedValue}
-                onValueChange = {onValueChange}
-                style= {style.input}>
-                    {renderPickerItem}
-               </Picker>
-               </View>
-
-
+                <Picker 
+                   selectedValue= {seletedValue} 
+                   onValueChange = { onValueChange}
+                   style= {style.input}>
+                       { renderPickerItem }
+                </Picker>
+            </View>
          );
     }
 }

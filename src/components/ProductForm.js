@@ -4,48 +4,49 @@ import { connect } from 'react-redux';
 
 import { CardSection, Input, InputPicker } from './common';
 
-class ProductForm extends Component { 
+class ProductForm extends Component {
     state = {
         categoryList: []
     }
-    componentDidMount() {
+
+    componentDidMount () {
         if ( this.props.hasCategory ) {
-            this.setState({ categoryList: this.props.categoryList })
+            this.setState({ categoryList : this.props.categoryList })
         } else {
-            
             axios.get('https://simple-ecommerce-9999.herokuapp.com/api/v1/category')
-            .then ( ({ data }) => {
-                console.log(data.data);
+            .then(({data}) => {
                 this.setState({ categoryList: data.data })
                 this.props.dispatch({ type: 'SET_CATEGORY_LIST', payload: data.data })
+                console.log(data.data);
             })
-        }       
-    }
+        }      
+    }   
     render() { 
-        const pickerData = this.state.categoryList.map( item => {
+        const pickerData = this.state.categoryList.map(item => {
             return {
                 label: item.name,
                 value: item.id
             }
         })
         return ( 
-            <>
+          <>
             <CardSection>
-                <Input label= "Name" placeholder="Product name" />
+                <Input label="Name" placeholder="Product Name" />
             </CardSection>
             <CardSection>
-                <Input label= "Price" placeholder="Product price" />
+                <Input label="Price" placeholder="Product Price" />
             </CardSection>
             <CardSection>
-                <Input label= "Image" placeholder="https://..." />  
+                <Input label="Image" placeholder="https://..." />
             </CardSection>
             <CardSection>
-                <Input label= "Action Link" placeholder="https://..." />
+                <Input label="Action Link" placeholder="https://..." />
             </CardSection>
             <CardSection>
-                <InputPicker label = "Category" data = { pickerData } />
+                <InputPicker label= "Category" data= {pickerData} />
             </CardSection>
-            </>
+
+          </>  
          );
     }
 }
@@ -57,4 +58,4 @@ const mstp = (state) => {
     }
 }
  
-export default connect()(ProductForm);
+export default connect(mstp)(ProductForm);
