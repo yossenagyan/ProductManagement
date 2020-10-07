@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, Image, StyleSheet, Linking} from 'react-native';
+import { connect } from 'react-redux';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import {Card, CardSection, Button} from './common'
 
@@ -36,12 +38,25 @@ class ProductItem extends Component {
             return 'Rp0'
         }
     }
+
+    onEditPress() {
+        console.log('Edit Product');
+        this.props.dispatch({ type: 'SET_PRODUCT', payload: this.props.product})
+        this.props.navigation.navigate('Edit Product')
+    }
     
     render() {
         const {name, price, image, actionLink} =this.props.product
 
         return (
             <Card>
+                <CardSection>
+                    <TouchableWithoutFeedback onPress={ () => this.onEditPress()}>
+                        <Text>
+                            Edit
+                        </Text>
+                    </TouchableWithoutFeedback>
+                </CardSection>
                 <CardSection>
                     <Image style = {style.image} source={ {uri: image} }></Image>
                 </CardSection>
@@ -62,4 +77,4 @@ class ProductItem extends Component {
     }
 }
 
-export default ProductItem;
+export default connect()(ProductItem);

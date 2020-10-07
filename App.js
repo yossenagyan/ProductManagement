@@ -12,6 +12,7 @@ import LoginForm from './src/components/LoginForm';
 import Logout from './src/components/Logout';
 import ProductList from './src/components/ProductList';
 import ProductCreate from './src/components/ProductCreate';
+import ProductEdit from './src/components/ProductEdit';
 
 
 import config from './src/config';
@@ -46,8 +47,16 @@ class App extends Component {
         { this.state.loggedIn ? 
           <>
           <Drawer.Screen name="Product List" component={ ProductList } />
-          <Drawer.Screen name="Add New Product" component={ ProductCreate } />
+          <Drawer.Screen name="Add New Product" component={ ProductCreate } />     
           <Drawer.Screen name="Logout" component={ Logout } />
+          <Drawer.Screen 
+              name="Edit Product" 
+              component={ProductEdit} 
+              options={{ 
+                drawerLabel: () => null,
+                title: null,
+                drawerIcon: () => null 
+                }} />
           </>
         : 
           <>

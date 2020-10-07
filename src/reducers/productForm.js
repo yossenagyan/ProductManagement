@@ -1,9 +1,9 @@
 const initialState = {
-    id_category: '',
     name: '',
     price: '',
     image: '',
     actionLink: '',
+    id_category: '',
 }
 
 export default ( state = initialState, action) => {

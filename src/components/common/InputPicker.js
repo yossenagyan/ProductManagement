@@ -29,17 +29,17 @@ const style = StyleSheet.create({
 class InputPicker extends Component {
 
     render() { 
-        const { label, data, seletedValue, onValueChange } = this.props
+        const { label, data, selectedValue, onValueChange } = this.props
         
         const renderPickerItem = data.map((item, i) =>
             <Picker.Item label= { item.label } value= { item.value } key= { i } />
         )
-        
+
         return ( 
             <View style= {style.containter}>
                 <Text style= {style.label}>{label}</Text>
                 <Picker 
-                   selectedValue= {seletedValue} 
+                   selectedValue= {selectedValue} 
                    onValueChange = { onValueChange}
                    style= {style.input}>
                        { renderPickerItem }

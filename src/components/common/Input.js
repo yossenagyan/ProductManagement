@@ -40,7 +40,7 @@ class Input extends Component {
             <View style= {style.containter}>
                 <Text style= {style.label}>{label}</Text>
                 <TextInput
-                value= {value}
+                value= { String(value)}
                 onChangeText = {onChangeText}
                 style= {style.input} 
                 placeholder={placeholder}
